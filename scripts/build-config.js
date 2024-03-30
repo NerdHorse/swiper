@@ -24,6 +24,7 @@ export const modules = envBuildModules || [
   'effect-cube',
   'effect-flip',
   'effect-coverflow',
+  'effect-custom-coverflow',
   'effect-creative',
   'effect-cards',
 ];

@@ -2,9 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <title>Swiper Playground</title>
-  <meta name="viewport" content="width=device-width" />
+  <meta charset="utf-8" />
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Demo styles -->
   <style>
     html,
     body {
@@ -21,64 +25,89 @@
       padding: 0;
     }
 
-    .swiper {
+    .swiper.mySwiper {
       width: 100%;
-      height: 100%;
+      padding-top: 50px;
+      padding-bottom: 50px;
     }
 
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      display: flex !important;
-      justify-content: center;
-      align-items: center;
+    .swiper.mySwiper .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 300px;
+      height: 300px;
+    }
+
+    .swiper.mySwiper .swiper-slide img {
+      display: block;
+      width: 100%;
     }
   </style>
 </head>
 
 <body>
-  <div class="swiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-      <div class="swiper-slide">Slide 6</div>
-      <div class="swiper-slide">Slide 7</div>
+<!-- Swiper -->
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
     </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
-    <div class="swiper-scrollbar"></div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+    </div>
   </div>
+  <div class="swiper-pagination"></div>
+</div>
 
+<!-- Swiper JS -->
 
-  <script type="module">
-    // // eslint-disable-next-line
-    import 'swiper/swiper-bundle.css';
+<!-- Initialize Swiper -->
 
-    // // eslint-disable-next-line
-    import Swiper from 'swiper/swiper-bundle.mjs';
+<script type="module">
+  // // eslint-disable-next-line
+  import 'swiper/swiper-bundle.css';
 
-    window.swiper = new Swiper(".swiper", {
-      slidesPerView: 'auto',
-      // spaceBetween: 30,
-      scrollbar: {
-        el: '.swiper-scrollbar',
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
-      },
-    });
-
-  </script>
+  // // eslint-disable-next-line
+  import Swiper from 'swiper/swiper-bundle.mjs';
+  var swiper = new Swiper(".mySwiper", {
+    effect: "custom-coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    customCoverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
+</script>
 </body>
 
 </html>
+

@@ -6,6 +6,7 @@ import type { A11yMethods } from './modules/a11y.d.ts';
 import type { AutoplayMethods } from './modules/autoplay.d.ts';
 import type { ControllerMethods } from './modules/controller.d.ts';
 import type { CoverflowEffectMethods } from './modules/effect-coverflow.d.ts';
+import type { CustomCoverflowEffectMethods } from './modules/effect-custom-coverflow.d.ts';
 import type { CubeEffectMethods } from './modules/effect-cube.d.ts';
 import type { FadeEffectMethods } from './modules/effect-fade.d.ts';
 import type { FlipEffectMethods } from './modules/effect-flip.d.ts';
@@ -439,6 +440,7 @@ interface Swiper extends SwiperClass<SwiperEvents> {
   autoplay: AutoplayMethods;
   controller: ControllerMethods;
   coverflowEffect: CoverflowEffectMethods;
+  customCoverflowEffect: CustomCoverflowEffectMethods;
   cubeEffect: CubeEffectMethods;
   fadeEffect: FadeEffectMethods;
   flipEffect: FlipEffectMethods;
