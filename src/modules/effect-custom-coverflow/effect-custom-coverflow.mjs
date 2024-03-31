@@ -6,12 +6,13 @@ import { getSlideTransformEl } from '../../shared/utils.mjs';
 export default function EffectCustomCoverflow({ swiper, extendParams, on }) {
   extendParams({
     customCoverflowEffect: {
-      rotate: 20,
-      stretch: 0,
-      depth: 100,
+      rotate: [0,75],
+      stretch: [0,28,80,84,84,88,92],
+      itemSize:125,
+      depth: 0,
       scale: 1,
       modifier: 1,
-      slideShadows: true,
+      slideShadows: false,
     },
   });
 
@@ -21,7 +22,8 @@ export default function EffectCustomCoverflow({ swiper, extendParams, on }) {
     const isHorizontal = swiper.isHorizontal();
     const transform = swiper.translate;
     const center = isHorizontal ? -transform + swiperWidth / 2 : -transform + swiperHeight / 2;
-    const rotate = isHorizontal ? params.rotate : -params.rotate;
+
+    let rotate = isHorizontal ? params.rotate : params.rotate.map(e=>e*-1);
     const translate = params.depth;
     // Each slide offset from center
     for (let i = 0, length = slides.length; i < length; i += 1) {
@@ -34,21 +36,58 @@ export default function EffectCustomCoverflow({ swiper, extendParams, on }) {
           ? params.modifier(centerOffset)
           : centerOffset * params.modifier;
 
-      let rotateY = isHorizontal ? rotate * offsetMultiplier : 0;
-      if(Math.abs(rotateY)>90){
-        rotateY = rotateY > 0 ? 90: -90;
+      let rotateIndex = Math.ceil(Math.abs(offsetMultiplier));
+      let power = Math.abs(offsetMultiplier % 1);
+      if(power == 0){
+        rotateIndex++;
       }
-      let rotateX = isHorizontal ? 0 : rotate * offsetMultiplier;
+      if(rotateIndex  >= rotate.length){
+        power = 1;
+        rotateIndex = rotate.length -1
+      }
+
+
+      let rotateS =rotate[Math.max(rotateIndex-1,0)];
+      let rotateF =rotate[rotateIndex];
+        let rotateValue = ((rotateF - rotateS)  * power) + rotateS;
+
+      rotateValue = rotateValue *(offsetMultiplier>0?1:-1);
+
+
+      let rotateY = isHorizontal ?rotateValue : 0;
+
+
+
+      let rotateX = isHorizontal ? 0 : rotateValue;
       // var rotateZ = 0
       let translateZ = -translate * Math.abs(offsetMultiplier);
 
-      let stretch = params.stretch;
-      // Allow percentage to make a relative stretch for responsive sliders
-      if (typeof stretch === 'string' && stretch.indexOf('%') !== -1) {
-        stretch = (parseFloat(params.stretch) / 100) * slideSize;
+      let stretch = params.stretch.map((e)=>params.itemSize*(e/100));
+      let stretchIndexBefore = Math.floor(Math.abs(offsetMultiplier));
+      let stretchIndexAfter = Math.ceil(Math.abs(offsetMultiplier));
+      let stretchPower = Math.abs(offsetMultiplier )-stretchIndexBefore;
+
+      let stretchDeltaCount =0;
+      for(let s=0; s<= stretchIndexBefore;s++){
+        stretchDeltaCount+=stretch[s>=stretch.length?stretch.length -1:s];
       }
-      let translateY = isHorizontal ? 0 : stretch * offsetMultiplier;
-      let translateX = isHorizontal ? stretch * offsetMultiplier : 0;
+
+
+      let stretchValue = 0;
+      if(stretchIndexAfter  >= stretch.length){
+        stretchIndexAfter = stretch.length -1
+      }
+
+      let stretchF =stretch[stretchIndexAfter];
+      let stretchEnd = stretchF * stretchPower;
+
+      stretchValue = stretchDeltaCount + stretchEnd;
+
+      stretchValue = stretchValue *(offsetMultiplier>0?1:-1);
+
+      let translateY = isHorizontal ? 0 : stretchValue;
+      let translateX = isHorizontal ? stretchValue : 0;
+
 
       let scale = 1 - (1 - params.scale) * Math.abs(offsetMultiplier);
 

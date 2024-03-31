@@ -26,21 +26,24 @@
     }
 
     .swiper.mySwiper {
-      width: 100%;
+      width: 416px;
       padding-top: 50px;
       padding-bottom: 50px;
+      perspective: calc(416px * 1.2);
     }
 
     .swiper.mySwiper .swiper-slide {
       background-position: center;
       background-size: cover;
-      width: 300px;
-      height: 300px;
+      width: 125px;
+      height: 166px;
     }
 
     .swiper.mySwiper .swiper-slide img {
       display: block;
-      width: 100%;
+      width: calc(100% - 10px);
+      height: 100%;
+      border: 5px solid #000000;
     }
   </style>
 </head>
@@ -49,6 +52,7 @@
 <!-- Swiper -->
 <div class="swiper mySwiper">
   <div class="swiper-wrapper">
+
     <div class="swiper-slide">
       <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
     </div>
@@ -64,26 +68,71 @@
     <div class="swiper-slide">
       <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
     </div>
-    <div class="swiper-slide">
+    <div class="swiper-slide" >
       <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
     </div>
-    <div class="swiper-slide">
+    <div class="swiper-slide" >
       <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
     </div>
     <div class="swiper-slide">
       <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
     </div>
     <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+      <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+    </div>
+    <div class="swiper-slide" >
+      <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+    </div>
+    <div class="swiper-slide" >
+      <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+    </div>
+    <div class="swiper-slide" >
+      <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+    </div>
+    <div class="swiper-slide" >
+      <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
     </div>
   </div>
-  <div class="swiper-pagination"></div>
+  <div class="swiper-scrollbar"></div>
 </div>
 
 <!-- Swiper JS -->
 
 <!-- Initialize Swiper -->
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script type="module">
   // // eslint-disable-next-line
   import 'swiper/swiper-bundle.css';
@@ -95,17 +144,22 @@
     grabCursor: true,
     centeredSlides: true,
     slidesPerView: "auto",
-    customCoverflowEffect: {
-      rotate: 50,
-      stretch: 0,
-      depth: 100,
-      modifier: 1,
-      slideShadows: true,
+    scrollbar: {
+      el: ".swiper-scrollbar",
+      draggable:true
     },
-    pagination: {
-      el: ".swiper-pagination",
-    },
+    resistanceRatio:0.75,
+    slideToClickedSlide:true,
   });
+  swiper.on('click', (swiper, event) =>{
+    console.log('swiper click',swiper, event);
+  });
+
+  /*let cards = $(".swiper-slide").on("click",(e)=>{
+
+    swiper.slideTo($(e.currentTarget).data("index"));
+  })*/
+
 </script>
 </body>
 
