@@ -12,6 +12,7 @@ export default function Virtual({ swiper, extendParams, on, emit }) {
       renderExternalUpdate: true,
       addSlidesBefore: 0,
       addSlidesAfter: 0,
+      multiple:2
     },
   });
 
@@ -60,12 +61,12 @@ export default function Virtual({ swiper, extendParams, on, emit }) {
 
   function update(force, beforeInit) {
     const {
-      slidesPerView,
       slidesPerGroup,
       centeredSlides,
       loop: isLoop,
       initialSlide,
     } = swiper.params;
+    const slidesPerView = swiper.params.slidesPerView * swiper.params.virtual.multiple;
     if (beforeInit && !isLoop && initialSlide > 0) {
       return;
     }

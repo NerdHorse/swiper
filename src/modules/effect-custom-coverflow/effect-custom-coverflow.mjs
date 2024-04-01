@@ -6,8 +6,8 @@ import { getSlideTransformEl } from '../../shared/utils.mjs';
 export default function EffectCustomCoverflow({ swiper, extendParams, on }) {
   extendParams({
     customCoverflowEffect: {
-      rotate: [0,75],
-      stretch: [0,28,80,84,84,88,92],
+      rotate: [0,75,85],
+      stretch: [0,28,76,84,84,88,92],
       itemSize:125,
       depth: 0,
       scale: 1,

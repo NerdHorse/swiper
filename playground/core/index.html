@@ -17,7 +17,7 @@
     }
 
     body {
-      background: #eee;
+      background:#2f3539;
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
       font-size: 14px;
       color: #000;
@@ -37,13 +37,49 @@
       background-size: cover;
       width: 125px;
       height: 166px;
+
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        position: relative;
+        background: #1e272e;
+        border-radius: 5px;
     }
 
     .swiper.mySwiper .swiper-slide img {
       display: block;
+        margin-top: 4.7px;
+        margin-left: 5px;
       width: calc(100% - 10px);
-      height: 100%;
-      border: 5px solid #000000;
+      height: calc(100% - 10px);
+        border-radius: 3.5px;
+    }
+    .swiper.mySwiper .swiper-slide .framebox-left {
+        left: 0;
+        top:0;
+        background: rgb(25,33,38);
+        background: linear-gradient(90deg, rgba(25,33,38,1) 0%, rgba(30,39,46,1) 100%);
+        transform: translate3d(1px, 0, -4.4px) rotateY(-90deg);
+        transform-origin: 0%;
+        width: 5px;
+        backface-visibility: hidden;
+        height: 100%;
+        position: absolute;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+    .swiper.mySwiper .swiper-slide .framebox-right {
+        right: 0;
+        top:0;
+        background: rgb(30,39,46);
+        background: linear-gradient(90deg, rgba(30,39,46,1) 0%, rgba(25,33,38,1) 100%);
+        transform: translate3d(-1px, 0, -4.4px) rotateY(90deg);
+        transform-origin: 100%;
+        width: 5px;
+        backface-visibility: hidden;
+        height: 100%;
+        position: absolute;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
     }
   </style>
 </head>
@@ -53,78 +89,7 @@
 <div class="swiper mySwiper">
   <div class="swiper-wrapper">
 
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-    </div>
-    <div class="swiper-slide" >
-      <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-    </div>
-    <div class="swiper-slide" >
-      <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-    </div>
-    <div class="swiper-slide" >
-      <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-    </div>
-    <div class="swiper-slide" >
-      <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-    </div>
-    <div class="swiper-slide" >
-      <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-    </div>
-    <div class="swiper-slide" >
-      <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-    </div>
-    <div class="swiper-slide">
-      <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-    </div>
+
   </div>
   <div class="swiper-scrollbar"></div>
 </div>
@@ -143,13 +108,31 @@
     effect: "custom-coverflow",
     grabCursor: true,
     centeredSlides: true,
-    slidesPerView: "auto",
+    slidesPerView: (function(){
+      let wraperSizer = 416;
+      let cardSize = 125;
+        return wraperSizer/cardSize;
+    })(),
     scrollbar: {
       el: ".swiper-scrollbar",
       draggable:true
     },
     resistanceRatio:0.75,
     slideToClickedSlide:true,
+    virtual: {
+      multiple:4,
+      slides: (function () {
+        const slides = [];
+        for (var i = 0; i < 20; i += 1) {
+          slides.push(`
+                    <img src="https://swiperjs.com/demos/images/nature-${(i%8)+1}.jpg" />
+                    <div class="framebox-left"></div>
+                    <div class="framebox-right"></div>
+`)
+        }
+        return slides;
+      })(),
+    },
   });
   swiper.on('click', (swiper, event) =>{
     console.log('swiper click',swiper, event);
