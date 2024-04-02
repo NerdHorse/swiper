@@ -120,12 +120,11 @@
     resistanceRatio:0.75,
     slideToClickedSlide:true,
     virtual: {
-      multiple:4,
+      multiple:6,
       slides: (function () {
         const slides = [];
         for (var i = 0; i < 20; i += 1) {
           slides.push(`
-                    <img src="https://swiperjs.com/demos/images/nature-${(i%8)+1}.jpg" />
                     <div class="framebox-left"></div>
                     <div class="framebox-right"></div>
 `)

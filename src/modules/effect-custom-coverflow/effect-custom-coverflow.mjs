@@ -6,10 +6,10 @@ import { getSlideTransformEl } from '../../shared/utils.mjs';
 export default function EffectCustomCoverflow({ swiper, extendParams, on }) {
   extendParams({
     customCoverflowEffect: {
-      rotate: [0,75,85],
-      stretch: [0,28,76,84,84,88,92],
+      rotate: [0,75,80,85,90],
+      stretch: [0,15,60 ],
       itemSize:125,
-      depth: 0,
+      depth: 100,
       scale: 1,
       modifier: 1,
       slideShadows: false,
@@ -60,7 +60,7 @@ export default function EffectCustomCoverflow({ swiper, extendParams, on }) {
 
       let rotateX = isHorizontal ? 0 : rotateValue;
       // var rotateZ = 0
-      let translateZ = -translate * Math.abs(offsetMultiplier);
+      let translateZ = -translate * Math.min(1,Math.abs(offsetMultiplier));
 
       let stretch = params.stretch.map((e)=>params.itemSize*(e/100));
       let stretchIndexBefore = Math.floor(Math.abs(offsetMultiplier));
