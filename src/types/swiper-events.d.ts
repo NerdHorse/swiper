@@ -5,6 +5,7 @@ import type { A11yEvents } from './modules/a11y.d.ts';
 import type { AutoplayEvents } from './modules/autoplay.d.ts';
 import type { ControllerEvents } from './modules/controller.d.ts';
 import type { CoverflowEffectEvents } from './modules/effect-coverflow.d.ts';
+import type { CustomCoverflowEffectEvents } from './modules/effect-custom-coverflow.d.ts';
 import type { CubeEffectEvents } from './modules/effect-cube.d.ts';
 import type { FadeEffectEvents } from './modules/effect-fade.d.ts';
 import type { FlipEffectEvents } from './modules/effect-flip.d.ts';
@@ -340,6 +341,7 @@ interface SwiperEvents extends A11yEvents {}
 interface SwiperEvents extends AutoplayEvents {}
 interface SwiperEvents extends ControllerEvents {}
 interface SwiperEvents extends CoverflowEffectEvents {}
+interface SwiperEvents extends CustomCoverflowEffectEvents {}
 interface SwiperEvents extends CubeEffectEvents {}
 interface SwiperEvents extends FadeEffectEvents {}
 interface SwiperEvents extends FlipEffectEvents {}

@@ -2,6 +2,7 @@ import type { A11yOptions } from './modules/a11y.d.ts';
 import type { AutoplayOptions } from './modules/autoplay.d.ts';
 import type { ControllerOptions } from './modules/controller.d.ts';
 import type { CoverflowEffectOptions } from './modules/effect-coverflow.d.ts';
+import type { CustomCoverflowEffectOptions } from './modules/effect-custom-coverflow.d.ts';
 import type { CubeEffectOptions } from './modules/effect-cube.d.ts';
 import type { FadeEffectOptions } from './modules/effect-fade.d.ts';
 import type { FlipEffectOptions } from './modules/effect-flip.d.ts';
@@ -928,6 +929,7 @@ export interface SwiperOptions {
    * ```
    */
   coverflowEffect?: CoverflowEffectOptions;
+  customCoverflowEffect?: CustomCoverflowEffectOptions;
 
   /**
    * Object with Cube-effect parameters
