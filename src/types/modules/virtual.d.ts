@@ -132,4 +132,11 @@ export interface VirtualOptions<T = any> {
    * @default true
    */
   renderExternalUpdate?: boolean;
+
+  /**
+   * Multiplier the core option slidesPerView. Increase this number to render more slides
+   *
+   * @default 2
+   */
+  multiple?:number
 }

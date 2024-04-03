@@ -10,17 +10,17 @@ export interface CustomCoverflowEffectOptions {
    */
   slideShadows?: boolean;
   /**
-   * Slide rotate in degrees
+   * Slide rotate in degrees. If the index of the slide is bigger than the of elements of the array then it will take the last one
    *
-   * @default 50
+   * @default [0,75,80,85,90]
    */
-  rotate?: number;
+  rotate?: number[];
   /**
-   * Stretch space between slides (in px)
+   * Stretch space between slides (in px) on each index. If the index of the slide is bigger than the of elements of the array then it will take the last one
    *
-   * @default 0
+   * @default [0,15,60 ]
    */
-  stretch?: number;
+  stretch?: number[];
   /**
    * Depth offset in px (slides translate in Z axis)
    *
@@ -39,4 +39,11 @@ export interface CustomCoverflowEffectOptions {
    * @default 1
    */
   modifier?: number;
+
+  /**
+   * item element size in px
+   *
+   * @default 125
+   */
+  itemSize?:number
 }
