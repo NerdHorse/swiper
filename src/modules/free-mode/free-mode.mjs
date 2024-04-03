@@ -190,7 +190,7 @@ export default function freeMode({ swiper, extendParams, emit, once }) {
           emit('momentumBounce');
 
           let dataBounce = {i:swiper.getTranslate(),f:afterBouncePosition};
-          let tweenBounce = gsap.to(dataBounce,{
+          let tweenBounce = swiper.params.gsap.to(dataBounce,{
             i:dataBounce.f,
             duration:params.speed/1000,
             onUpdate:()=>{swiper.setTranslate(dataBounce.i);},
