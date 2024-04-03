@@ -51,4 +51,5 @@ export {
   FreeMode,
   Grid,
   Manipulation,
+  EffectCustomCoverflow
 };
