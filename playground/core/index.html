@@ -31,7 +31,6 @@
       padding-bottom: 50px;
       perspective: calc(416px * 1.2);
     }
-
     .swiper.mySwiper .swiper-slide {
       background-position: center;
       background-size: cover;
@@ -44,7 +43,6 @@
         background: #1e272e;
         border-radius: 5px;
     }
-
     .swiper.mySwiper .swiper-slide img {
       display: block;
         margin-top: 4.7px;
@@ -132,6 +130,9 @@
         return slides;
       })(),
     },
+    freeMode:{
+      enabled:true,
+    }
   });
   swiper.on('click', (swiper, event) =>{
     console.log('swiper click',swiper, event);

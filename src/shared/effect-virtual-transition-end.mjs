@@ -36,6 +36,7 @@ export default function effectVirtualTransitionEnd({
         if (!swiper || swiper.destroyed) return;
         eventTriggered = true;
         swiper.animating = false;
+        console.log("effect-virtual-transition-end")
         const evt = new window.CustomEvent('transitionend', {
           bubbles: true,
           cancelable: true,

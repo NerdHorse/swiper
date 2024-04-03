@@ -1,4 +1,7 @@
 import { elementTransitionEnd, now } from '../../shared/utils.mjs';
+import { gsap } from "gsap";
+
+
 
 export default function freeMode({ swiper, extendParams, emit, once }) {
   extendParams({
@@ -9,8 +12,9 @@ export default function freeMode({ swiper, extendParams, emit, once }) {
       momentumBounce: true,
       momentumBounceRatio: 1,
       momentumVelocityRatio: 1,
-      sticky: false,
+      sticky: true,
       minimumVelocity: 0.02,
+      tween:null
     },
   });
 
@@ -18,7 +22,10 @@ export default function freeMode({ swiper, extendParams, emit, once }) {
     if (swiper.params.cssMode) return;
     const translate = swiper.getTranslate();
     swiper.setTranslate(translate);
-    swiper.setTransition(0);
+    if(swiper.params.freeMode.tween != null){
+      swiper.params.freeMode.tween.kill();
+      swiper.params.freeMode.tween = null;
+    }
     swiper.touchEventsData.velocities.length = 0;
     swiper.freeMode.onTouchEnd({ currentPos: swiper.rtl ? swiper.translate : -swiper.translate });
   }
@@ -171,40 +178,55 @@ export default function freeMode({ swiper, extendParams, emit, once }) {
         return;
       }
 
+
+      let functionEnd = ()=>{}
       if (params.freeMode.momentumBounce && doBounce) {
         swiper.updateProgress(afterBouncePosition);
-        swiper.setTransition(momentumDuration);
-        swiper.setTranslate(newPosition);
-        swiper.transitionStart(true, swiper.swipeDirection);
         swiper.animating = true;
-        elementTransitionEnd(wrapperEl, () => {
+        swiper.transitionStart(true, swiper.swipeDirection);
+
+
+        functionEnd = ()=>{
           if (!swiper || swiper.destroyed || !data.allowMomentumBounce) return;
           emit('momentumBounce');
-          swiper.setTransition(params.speed);
-          setTimeout(() => {
-            swiper.setTranslate(afterBouncePosition);
-            elementTransitionEnd(wrapperEl, () => {
+
+          let dataBounce = {i:swiper.getTranslate(),f:afterBouncePosition};
+          let tweenBounce = new gsap.to(dataBounce,{
+            i:dataBounce.f,
+            duration:params.speed/1000,
+            onUpdate:()=>{swiper.setTranslate(dataBounce.i);},
+            onComplete:()=>{
               if (!swiper || swiper.destroyed) return;
               swiper.transitionEnd();
-            });
-          }, 0);
-        });
+              swiper.slideToClosest();
+            }
+          });
+          swiper.params.freeMode.tween = tweenBounce;
+        }
+
       } else if (swiper.velocity) {
         emit('_freeModeNoMomentumRelease');
         swiper.updateProgress(newPosition);
-        swiper.setTransition(momentumDuration);
-        swiper.setTranslate(newPosition);
         swiper.transitionStart(true, swiper.swipeDirection);
         if (!swiper.animating) {
           swiper.animating = true;
-          elementTransitionEnd(wrapperEl, () => {
+          functionEnd=()=>{
             if (!swiper || swiper.destroyed) return;
             swiper.transitionEnd();
-          });
+            swiper.slideToClosest();
+          }
         }
       } else {
         swiper.updateProgress(newPosition);
       }
+      let tweenData = {i:swiper.getTranslate(),f:newPosition};
+      let tween = new gsap.to(tweenData,{
+        i:tweenData.f,
+        duration:momentumDuration/1000,
+        onUpdate:()=>{swiper.setTranslate(tweenData.i);},
+        onComplete:functionEnd
+      });
+      swiper.params.freeMode.tween = tween;
 
       swiper.updateActiveIndex();
       swiper.updateSlidesClasses();

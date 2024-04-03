@@ -126,6 +126,8 @@ export default function Controller({ swiper, extendParams, on }) {
         }
         elementTransitionEnd(c.wrapperEl, () => {
           if (!controlled) return;
+
+          console.log("controller")
           c.transitionEnd();
         });
       }
