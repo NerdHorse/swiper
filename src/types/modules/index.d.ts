@@ -4,6 +4,7 @@ declare const A11y: SwiperModule;
 declare const Autoplay: SwiperModule;
 declare const Controller: SwiperModule;
 declare const EffectCoverflow: SwiperModule;
+declare const EffectCustomCoverflow: SwiperModule;
 declare const EffectCube: SwiperModule;
 declare const EffectFade: SwiperModule;
 declare const EffectFlip: SwiperModule;
