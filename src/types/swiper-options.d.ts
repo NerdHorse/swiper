@@ -93,6 +93,18 @@ export interface SwiperOptions {
    */
   direction?: 'horizontal' | 'vertical';
 
+  gsap: {
+    to:(
+      target:{[k:string]:number},
+      options:{
+        duration:number,
+        [k:string]:any,
+        onComplete?:()=>void,
+        onUpdate?:()=>void,
+      }
+    ) =>{kill:()=>void}
+  };
+
   /**
    * When enabled, will swipe slides only forward (one-way) regardless of swipe direction
    *

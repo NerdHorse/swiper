@@ -1,5 +1,4 @@
 import { elementTransitionEnd, now } from '../../shared/utils.mjs';
-import { gsap } from "gsap";
 
 
 
@@ -191,7 +190,7 @@ export default function freeMode({ swiper, extendParams, emit, once }) {
           emit('momentumBounce');
 
           let dataBounce = {i:swiper.getTranslate(),f:afterBouncePosition};
-          let tweenBounce = new gsap.to(dataBounce,{
+          let tweenBounce = gsap.to(dataBounce,{
             i:dataBounce.f,
             duration:params.speed/1000,
             onUpdate:()=>{swiper.setTranslate(dataBounce.i);},
@@ -220,7 +219,7 @@ export default function freeMode({ swiper, extendParams, emit, once }) {
         swiper.updateProgress(newPosition);
       }
       let tweenData = {i:swiper.getTranslate(),f:newPosition};
-      let tween = new gsap.to(tweenData,{
+      let tween = swiper.params.gsap.to(tweenData,{
         i:tweenData.f,
         duration:momentumDuration/1000,
         onUpdate:()=>{swiper.setTranslate(tweenData.i);},
