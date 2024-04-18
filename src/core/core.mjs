@@ -717,6 +717,32 @@ class Swiper {
     Swiper.installModule(module);
     return Swiper;
   }
+
+  setOnClickToSlice(){
+    const swiper = this;
+    swiper.on('click', (swiper, event) =>{
+
+      let temp = {
+        i:swiper.getTranslate(),
+        f:-swiper.snapGrid[swiper.clickedIndex]
+      };
+      swiper.updateProgress(temp.f);
+      swiper.transitionStart(true, swiper.swipeDirection);
+      swiper.animating = true;
+
+      let tweenBounce = swiper.params.gsap.to(temp,{
+        i:temp.f,
+        duration:300/1000,
+        onUpdate:()=>{
+          swiper.setTranslate(temp.i);
+        },
+        onComplete:()=>{
+          if (!swiper || swiper.destroyed) return;
+          swiper.transitionEnd();
+        }
+      });
+    });
+  }
 }
 
 Object.keys(prototypes).forEach((prototypeGroup) => {

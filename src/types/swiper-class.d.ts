@@ -360,6 +360,7 @@ interface Swiper extends SwiperClass<SwiperEvents> {
    */
   destroy(deleteInstance?: boolean, cleanStyles?: boolean): void;
 
+  setOnClickToSlice():void;
   /**
    * Set custom css3 transform's translate value for swiper wrapper
    */
