@@ -19,7 +19,7 @@ export const modules = envBuildModules || [
   // 'thumbs',
    'free-mode',
   // 'grid',
-  // 'manipulation',
+  'manipulation',
   // 'effect-fade',
   // 'effect-cube',
   // 'effect-flip',
