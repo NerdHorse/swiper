@@ -148,4 +148,28 @@ export default function EffectCustomCoverflow({ swiper, extendParams, on }) {
       watchSlidesProgress: true,
     }),
   });
+
+
+  swiper.on('click', (swiper, event) =>{
+
+    let temp = {
+      i:swiper.getTranslate(),
+      f:-swiper.snapGrid[swiper.clickedIndex]
+    };
+    swiper.updateProgress(temp.f);
+    swiper.transitionStart(true, swiper.swipeDirection);
+    swiper.animating = true;
+
+    let tweenBounce = swiper.params.gsap.to(temp,{
+      i:temp.f,
+      duration:300/1000,
+      onUpdate:()=>{
+        swiper.setTranslate(temp.i);
+      },
+      onComplete:()=>{
+        if (!swiper || swiper.destroyed) return;
+        swiper.transitionEnd();
+      }
+    });
+  });
 }
