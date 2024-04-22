@@ -123,10 +123,8 @@
       slides: (function () {
         const slides = [];
         for (var i = 0; i < 20; i += 1) {
-          slides.push(`
-                    <div class="framebox-left"></div>
-                    <div class="framebox-right"></div>
-`)
+            slides.push("<img src=\"https://picsum.photos/300/400?random="+(Date.now()+i)+"\"></img><div class=\"framebox-left\"></div><div class=\"framebox-right\"></div><div class=\"swiper-lazy-preloader swiper-lazy-preloader-white\"></div>")
+
         }
         return slides;
       })(),

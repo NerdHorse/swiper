@@ -1,7 +1,7 @@
 export const processLazyPreloader = (swiper, imageEl) => {
   if (!swiper || swiper.destroyed || !swiper.params) return;
   const slideSelector = () => (swiper.isElement ? `swiper-slide` : `.${swiper.params.slideClass}`);
-  const slideEl = imageEl.closest(slideSelector());
+  const slideEl = findClosest(imageEl,slideSelector());
   if (slideEl) {
     let lazyEl = slideEl.querySelector(`.${swiper.params.lazyPreloaderClass}`);
     if (!lazyEl && swiper.isElement) {
@@ -21,6 +21,13 @@ export const processLazyPreloader = (swiper, imageEl) => {
   }
 };
 
+const findClosest = (element, selector)=> {
+  let currentElement = element;
+  while (currentElement && !currentElement.matches(selector)) {
+    currentElement = currentElement.parentElement;
+  }
+  return currentElement;
+}
 const unlazy = (swiper, index) => {
   if (!swiper.slides[index]) return;
   const imageEl = swiper.slides[index].querySelector('[loading="lazy"]');
