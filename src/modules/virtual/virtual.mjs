@@ -1,5 +1,6 @@
 import { getDocument } from 'ssr-window';
 import { createElement, elementChildren, setCSSProperty } from '../../shared/utils.mjs';
+import {processLazyPreloader} from "../../shared/process-lazy-preloader.mjs";
 
 export default function Virtual({ swiper, extendParams, on, emit }) {
   extendParams({
@@ -52,6 +53,27 @@ export default function Virtual({ swiper, extendParams, on, emit }) {
     if (!params.renderSlide) {
       slideEl.innerHTML = slide;
     }
+
+
+    let imageEl = slideEl.querySelector('img[data-loading]');
+    if(imageEl){
+      const tempImage = new Image();
+      tempImage.src = imageEl.getAttribute('data-src');
+      if (tempImage.complete) {
+        imageEl.src = tempImage.src;
+        imageEl.removeAttribute('data-loading');
+        processLazyPreloader(swiper, slideEl);
+      } else {
+        // Se a imagem ainda não estiver carregada, espera pelo evento 'load'
+        tempImage.addEventListener('load', () => {
+          imageEl.src = tempImage.src;
+          imageEl.removeAttribute('data-loading');
+          processLazyPreloader(swiper, slideEl);
+        });
+      }
+    }
+
+
 
     if (params.cache) {
       swiper.virtual.cache[index] = slideEl;
