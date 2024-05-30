@@ -26,10 +26,10 @@
     }
 
     .swiper.mySwiper {
-      width: 416px;
+      width: 125px;
+      height: 166px;
       padding-top: 50px;
       padding-bottom: 50px;
-      perspective: calc(416px * 1.2);
     }
     .swiper.mySwiper .swiper-slide {
       background-position: center;
@@ -43,45 +43,6 @@
         background: #1e272e;
         border-radius: 5px;
     }
-    .swiper.mySwiper .swiper-slide img {
-      display: block;
-        margin-top: 4.7px;
-        margin-left: 5px;
-      width: calc(100% - 10px);
-      height: calc(100% - 10px);
-        border-radius: 3.5px;
-    }
-    .swiper.mySwiper .swiper-slide img[data-loading]{
-        display: none;
-    }
-    .swiper.mySwiper .swiper-slide .framebox-left {
-        left: 0;
-        top:0;
-        background: rgb(25,33,38);
-        background: linear-gradient(90deg, rgba(25,33,38,1) 0%, rgba(30,39,46,1) 100%);
-        transform: translate3d(1px, 0, -4.4px) rotateY(-90deg);
-        transform-origin: 0%;
-        width: 5px;
-        backface-visibility: hidden;
-        height: 100%;
-        position: absolute;
-        border-bottom-left-radius: 5px;
-        border-top-left-radius: 5px;
-    }
-    .swiper.mySwiper .swiper-slide .framebox-right {
-        right: 0;
-        top:0;
-        background: rgb(30,39,46);
-        background: linear-gradient(90deg, rgba(30,39,46,1) 0%, rgba(25,33,38,1) 100%);
-        transform: translate3d(-1px, 0, -4.4px) rotateY(90deg);
-        transform-origin: 100%;
-        width: 5px;
-        backface-visibility: hidden;
-        height: 100%;
-        position: absolute;
-        border-bottom-right-radius: 5px;
-        border-top-right-radius: 5px;
-    }
   </style>
 </head>
 
@@ -89,6 +50,15 @@
 <!-- Swiper -->
 <div class="swiper mySwiper">
   <div class="swiper-wrapper">
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+    <div class="swiper-slide">Slide 4</div>
+    <div class="swiper-slide">Slide 5</div>
+    <div class="swiper-slide">Slide 6</div>
+    <div class="swiper-slide">Slide 7</div>
+    <div class="swiper-slide">Slide 8</div>
+    <div class="swiper-slide">Slide 9</div>
 
 
   </div>
@@ -107,38 +77,52 @@
   // // eslint-disable-next-line
   import Swiper from 'swiper/swiper-bundle.mjs';
   var swiper = new Swiper(".mySwiper", {
-    effect: "custom-coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: (function(){
-      let wraperSizer = 416;
-      let cardSize = 125;
-        return wraperSizer/cardSize;
-    })(),
-    scrollbar: {
-      el: ".swiper-scrollbar",
-      draggable:true
-    },
-    resistanceRatio:0.75,
-    gsap:gsap,
-    virtual: {
-      multiple:6,
-      slides: (function () {
-        const slides = [];
-        for (var i = 0; i < 200; i += 1) {
-            slides.push("<img data-src=\"https://picsum.photos/300/400?random="+(Date.now()+i)+"\" data-index=\""+i+"\" data-loading></img><div class=\"framebox-left\"></div><div class=\"framebox-right\"></div><div class=\"swiper-lazy-preloader swiper-lazy-preloader-white\"></div>")
-
-        }
-        return slides;
-      })(),
-    },
-      lazy:true,
-    freeMode:{
-      enabled:true,
-    }
+    allowTouchMove: false,
+    effect: "custom-cards",
+    gsap:gsap
   });
   swiper.setOnClickToSlice()
 
+  let nowIndex = 0
+  document.addEventListener('keyup', function(event) {
+
+    let nextIndex = nowIndex;
+
+    // Verifica se a tecla 'left' ou 'right' foi solta
+    if (event.key === 'ArrowLeft') {
+      nextIndex++;
+      // Execute qualquer ação desejada aqui
+    } else if (event.key === 'ArrowRight') {
+      nextIndex--;
+      // Execute qualquer ação desejada aqui
+    }
+    nextIndex = nextIndex< 0? 0 : nextIndex;
+    nextIndex = nextIndex > swiper.snapGrid.length-1 ? swiper.snapGrid.length-1 : nextIndex;
+
+    nowIndex = nextIndex;
+    let temp = {
+      i:swiper.getTranslate(),
+      f:-swiper.snapGrid[nextIndex]
+    };
+    swiper.updateProgress(temp.f);
+    swiper.transitionStart(true, swiper.swipeDirection);
+    swiper.animating = true;
+    console.log(nowIndex,nextIndex);
+
+    let tweenBounce = gsap.to(temp,{
+      i:temp.f,
+      duration:300/1000,
+      onUpdate:()=>{
+        swiper.setTranslate(temp.i);
+      },
+      onComplete:()=>{
+        if (!swiper || swiper.destroyed) return;
+        swiper.setTranslate(temp.f);
+        swiper.transitionEnd();
+      }
+    });
+
+  });
 
   /*let cards = $(".swiper-slide").on("click",(e)=>{
 

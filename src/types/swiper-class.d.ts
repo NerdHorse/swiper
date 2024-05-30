@@ -11,7 +11,7 @@ import type { CubeEffectMethods } from './modules/effect-cube.d.ts';
 import type { FadeEffectMethods } from './modules/effect-fade.d.ts';
 import type { FlipEffectMethods } from './modules/effect-flip.d.ts';
 import type { CreativeEffectMethods } from './modules/effect-creative.d.ts';
-import type { CardsEffectMethods } from './modules/effect-cards.d.ts';
+import type { CardsEffectMethods} from './modules/effect-cards.d.ts';
 import type { HashNavigationMethods } from './modules/hash-navigation.d.ts';
 import type { HistoryMethods } from './modules/history.d.ts';
 import type { KeyboardMethods } from './modules/keyboard.d.ts';
@@ -25,6 +25,7 @@ import type { VirtualMethods } from './modules/virtual.d.ts';
 import type { ZoomMethods } from './modules/zoom.d.ts';
 import type { FreeModeMethods } from './modules/free-mode.d.ts';
 import type { ManipulationMethods } from './modules/manipulation.d.ts';
+import type {CardsCustomEffectMethods} from './modules/effect-custom-cards.d.ts';
 
 interface SwiperClass<Events> {
   /** Add event handler */
@@ -447,6 +448,7 @@ interface Swiper extends SwiperClass<SwiperEvents> {
   flipEffect: FlipEffectMethods;
   creativeEffect: CreativeEffectMethods;
   cardsEffect: CardsEffectMethods;
+  customCardsEffect: CardsCustomEffectMethods;
   hashNavigation: HashNavigationMethods;
   history: HistoryMethods;
   keyboard: KeyboardMethods;

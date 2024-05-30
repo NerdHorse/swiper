@@ -3,11 +3,12 @@ import type { AutoplayOptions } from './modules/autoplay.d.ts';
 import type { ControllerOptions } from './modules/controller.d.ts';
 import type { CoverflowEffectOptions } from './modules/effect-coverflow.d.ts';
 import type { CustomCoverflowEffectOptions } from './modules/effect-custom-coverflow.d.ts';
+import type {CardsCustomEffectOptions} from './modules/effect-custom-cards.d.ts';
 import type { CubeEffectOptions } from './modules/effect-cube.d.ts';
 import type { FadeEffectOptions } from './modules/effect-fade.d.ts';
 import type { FlipEffectOptions } from './modules/effect-flip.d.ts';
 import type { CreativeEffectOptions } from './modules/effect-creative.d.ts';
-import type { CardsEffectOptions } from './modules/effect-cards.d.ts';
+import type { CardsEffectOptions} from './modules/effect-cards.d.ts';
 import type { HashNavigationOptions } from './modules/hash-navigation.d.ts';
 import type { HistoryOptions } from './modules/history.d.ts';
 import type { KeyboardOptions } from './modules/keyboard.d.ts';
@@ -1024,6 +1025,7 @@ export interface SwiperOptions {
    * ```
    */
   cardsEffect?: CardsEffectOptions;
+  customCardsEffect?: CardsCustomEffectOptions;
 
   /**
    * Enables hash url navigation to for slides.

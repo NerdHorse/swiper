@@ -738,6 +738,7 @@ class Swiper {
         },
         onComplete:()=>{
           if (!swiper || swiper.destroyed) return;
+          swiper.setTranslate(temp.f);
           swiper.transitionEnd();
         }
       });

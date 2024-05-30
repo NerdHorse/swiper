@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Demo styles -->
+  <style>
+    html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background:#2f3539;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper.mySwiper {
+      width: 416px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      perspective: calc(416px * 1.2);
+    }
+    .swiper.mySwiper .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 125px;
+      height: 166px;
+
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        position: relative;
+        background: #1e272e;
+        border-radius: 5px;
+    }
+    .swiper.mySwiper .swiper-slide img {
+      display: block;
+        margin-top: 4.7px;
+        margin-left: 5px;
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+        border-radius: 3.5px;
+    }
+    .swiper.mySwiper .swiper-slide img[data-loading]{
+        display: none;
+    }
+    .swiper.mySwiper .swiper-slide .framebox-left {
+        left: 0;
+        top:0;
+        background: rgb(25,33,38);
+        background: linear-gradient(90deg, rgba(25,33,38,1) 0%, rgba(30,39,46,1) 100%);
+        transform: translate3d(1px, 0, -4.4px) rotateY(-90deg);
+        transform-origin: 0%;
+        width: 5px;
+        backface-visibility: hidden;
+        height: 100%;
+        position: absolute;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+    .swiper.mySwiper .swiper-slide .framebox-right {
+        right: 0;
+        top:0;
+        background: rgb(30,39,46);
+        background: linear-gradient(90deg, rgba(30,39,46,1) 0%, rgba(25,33,38,1) 100%);
+        transform: translate3d(-1px, 0, -4.4px) rotateY(90deg);
+        transform-origin: 100%;
+        width: 5px;
+        backface-visibility: hidden;
+        height: 100%;
+        position: absolute;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+<!-- Swiper -->
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+
+
+  </div>
+  <div class="swiper-scrollbar"></div>
+</div>
+
+<!-- Swiper JS -->
+
+<!-- Initialize Swiper -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script type="module">
+  // // eslint-disable-next-line
+  import 'swiper/swiper-bundle.css';
+
+  // // eslint-disable-next-line
+  import Swiper from 'swiper/swiper-bundle.mjs';
+  var swiper = new Swiper(".mySwiper", {
+    effect: "custom-coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: (function(){
+      let wraperSizer = 416;
+      let cardSize = 125;
+        return wraperSizer/cardSize;
+    })(),
+    scrollbar: {
+      el: ".swiper-scrollbar",
+      draggable:true
+    },
+    resistanceRatio:0.75,
+    gsap:gsap,
+    virtual: {
+      multiple:6,
+      slides: (function () {
+        const slides = [];
+        for (var i = 0; i < 200; i += 1) {
+            slides.push("<img data-src=\"https://picsum.photos/300/400?random="+(Date.now()+i)+"\" data-index=\""+i+"\" data-loading></img><div class=\"framebox-left\"></div><div class=\"framebox-right\"></div><div class=\"swiper-lazy-preloader swiper-lazy-preloader-white\"></div>")
+
+        }
+        return slides;
+      })(),
+    },
+      lazy:true,
+    freeMode:{
+      enabled:true,
+    }
+  });
+  swiper.setOnClickToSlice()
+
+
+  /*let cards = $(".swiper-slide").on("click",(e)=>{
+
+    swiper.slideTo($(e.currentTarget).data("index"));
+  })*/
+
+</script>
+</body>
+
+</html>
+

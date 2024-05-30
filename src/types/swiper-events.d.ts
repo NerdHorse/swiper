@@ -10,7 +10,8 @@ import type { CubeEffectEvents } from './modules/effect-cube.d.ts';
 import type { FadeEffectEvents } from './modules/effect-fade.d.ts';
 import type { FlipEffectEvents } from './modules/effect-flip.d.ts';
 import type { CreativeEffectEvents } from './modules/effect-creative.d.ts';
-import type { CardsEffectEvents } from './modules/effect-cards.d.ts';
+import type {CardsEffectEvents} from './modules/effect-cards.d.ts';
+import type { CustomCardsEffectEvents } from './modules/effect-custom-cards.d.ts';
 import type { HashNavigationEvents } from './modules/hash-navigation.d.ts';
 import type { HistoryEvents } from './modules/history.d.ts';
 import type { KeyboardEvents } from './modules/keyboard.d.ts';
@@ -347,6 +348,7 @@ interface SwiperEvents extends FadeEffectEvents {}
 interface SwiperEvents extends FlipEffectEvents {}
 interface SwiperEvents extends CreativeEffectEvents {}
 interface SwiperEvents extends CardsEffectEvents {}
+interface SwiperEvents extends CustomCardsEffectEvents {}
 interface SwiperEvents extends HashNavigationEvents {}
 interface SwiperEvents extends HistoryEvents {}
 interface SwiperEvents extends KeyboardEvents {}

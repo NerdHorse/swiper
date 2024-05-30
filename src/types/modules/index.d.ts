@@ -10,6 +10,7 @@ declare const EffectFade: SwiperModule;
 declare const EffectFlip: SwiperModule;
 declare const EffectCreative: SwiperModule;
 declare const EffectCards: SwiperModule;
+declare const EffectCustomCards:SwiperModule;
 declare const HashNavigation: SwiperModule;
 declare const History: SwiperModule;
 declare const Keyboard: SwiperModule;
@@ -36,6 +37,7 @@ export {
   EffectFlip,
   EffectCreative,
   EffectCards,
+  EffectCustomCards,
   HashNavigation,
   History,
   Keyboard,

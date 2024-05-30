@@ -3,6 +3,7 @@ export type * from './autoplay.d.ts';
 export type * from './controller.d.ts';
 export type * from './effect-coverflow.d.ts';
 export type * from './effect-custom-coverflow.d.ts';
+export type * from './effect-custom-cards.d.ts';
 export type * from './effect-cube.d.ts';
 export type * from './effect-fade.d.ts';
 export type * from './effect-flip.d.ts';

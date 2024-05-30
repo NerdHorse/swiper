@@ -1,7 +1,6 @@
 export interface CardsEffectMethods {}
 
 export interface CardsEffectEvents {}
-
 export interface CardsEffectOptions {
   /**
    * Enables slides shadows
