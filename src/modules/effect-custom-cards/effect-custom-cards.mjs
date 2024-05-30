@@ -1,6 +1,7 @@
 import createShadow from '../../shared/create-shadow.mjs';
 import effectInit from '../../shared/effect-init.mjs';
 import effectTarget from '../../shared/effect-target.mjs';
+import {processLazyPreloader} from "../../shared/process-lazy-preloader.mjs";
 export default function EffectCustomCards({ swiper, extendParams, on }) {
   extendParams({
     customCardsEffect: {
@@ -98,12 +99,41 @@ export default function EffectCustomCards({ swiper, extendParams, on }) {
     effect: 'custom-cards',
     swiper,
     on,
+
     setTranslate,
     setTransition,
     perspective: () => true,
     overwriteParams: () => ({
+
+
       watchSlidesProgress: true,
       virtualTranslate: !swiper.params.cssMode,
     }),
+  });
+
+  on('init', () => {
+
+    const { slides } = swiper;
+    for (let i = 0, length = slides.length; i < length; i += 1) {
+      let slideEl = slides[i];
+
+      let imageEl = slideEl.querySelector('img[data-loading]');
+      if(imageEl){
+        const tempImage = new Image();
+        tempImage.src = imageEl.getAttribute('data-src');
+        if (tempImage.complete) {
+          imageEl.src = tempImage.src;
+          imageEl.removeAttribute('data-loading');
+          processLazyPreloader(swiper, slideEl);
+        } else {
+          // Se a imagem ainda não estiver carregada, espera pelo evento 'load'
+          tempImage.addEventListener('load', () => {
+            imageEl.src = tempImage.src;
+            imageEl.removeAttribute('data-loading');
+            processLazyPreloader(swiper, slideEl);
+          });
+        }
+      }
+    }
   });
 }
