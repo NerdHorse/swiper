@@ -30,6 +30,7 @@
       height: 166px;
       padding-top: 50px;
       padding-bottom: 50px;
+      perspective: calc(416px * 1.2);
     }
     .swiper.mySwiper .swiper-slide {
       background-position: center;
@@ -42,6 +43,7 @@
         position: relative;
         background: #1e272e;
         border-radius: 5px;
+      box-shadow: inset 0 0 0 1px #000000;
     }
   </style>
 </head>
@@ -77,9 +79,10 @@
   // // eslint-disable-next-line
   import Swiper from 'swiper/swiper-bundle.mjs';
   var swiper = new Swiper(".mySwiper", {
-    allowTouchMove: false,
+    //allowTouchMove: false,
     effect: "custom-cards",
-    gsap:gsap
+    gsap:gsap,
+    slideShadows: true,
   });
   swiper.setOnClickToSlice()
 
@@ -111,7 +114,7 @@
 
     let tweenBounce = gsap.to(temp,{
       i:temp.f,
-      duration:300/1000,
+      duration:1000/1000,
       onUpdate:()=>{
         swiper.setTranslate(temp.i);
       },
@@ -119,7 +122,8 @@
         if (!swiper || swiper.destroyed) return;
         swiper.setTranslate(temp.f);
         swiper.transitionEnd();
-      }
+      },
+
     });
 
   });

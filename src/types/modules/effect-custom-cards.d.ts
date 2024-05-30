@@ -5,7 +5,8 @@ export interface CustomCardsEffectEvents {}
 export interface CardsCustomEffectOptions{
   displacementX: number;
   displacementY: number;
-  displacementRotation: number;
+  displacementRotationY: number;
+  displacementRotationZ: number;
   slideSize: number;
 
 }
