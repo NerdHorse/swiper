@@ -13,7 +13,8 @@ export default function Virtual({ swiper, extendParams, on, emit }) {
       renderExternalUpdate: true,
       addSlidesBefore: 0,
       addSlidesAfter: 0,
-      multiple:2
+      multiple:2,
+      extraSlideClass: []
     },
   });
 
@@ -47,7 +48,7 @@ export default function Virtual({ swiper, extendParams, on, emit }) {
     } else if (swiper.isElement) {
       slideEl = createElement('swiper-slide');
     } else {
-      slideEl = createElement('div', swiper.params.slideClass);
+      slideEl = createElement('div', [swiper.params.slideClass,...params.extraSlideClass])
     }
     slideEl.setAttribute('data-swiper-slide-index', index);
     if (!params.renderSlide) {

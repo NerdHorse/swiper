@@ -138,5 +138,6 @@ export interface VirtualOptions<T = any> {
    *
    * @default 2
    */
-  multiple?:number
+  multiple?:number,
+  extraSlideClass:string[]
 }
