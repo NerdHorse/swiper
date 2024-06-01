@@ -8,8 +8,8 @@ export default function EffectCustomCards({ swiper, extendParams, on }) {
 
       slideSize: 125,
       displacementX: 125,
-      displacementY: -25,
-      displacementRotationZ: -28,
+      displacementY: 0,
+      displacementRotationZ: 0,
       displacementRotationY: 60
     },
   });
@@ -28,17 +28,17 @@ export default function EffectCustomCards({ swiper, extendParams, on }) {
       const offsetMultiplier = (center - slideOffset ) / params.slideSize;
 
       let tX = 0;
-      let tY = 13;
+      let tY = 5;
       let tZ = -150;
       let rotateY = 0;
       let rotateZ = 0;
-      let scale = 1.3;
+      let scale = 1.1;
       let alpha = 1;
 
       let zIndex = Math.abs(Math.round(offsetMultiplier)) + 1;
       if(offsetMultiplier>0 && offsetMultiplier < 1){
         tZ = 0;
-        scale = 1;
+        scale=1;
         let subProgress =0;
         if(offsetMultiplier< 0.5){
           subProgress = offsetMultiplier*2;
@@ -53,9 +53,9 @@ export default function EffectCustomCards({ swiper, extendParams, on }) {
       }else if(offsetMultiplier > -1 && offsetMultiplier<=0){
         tX = -slideOffset;
         if(offsetMultiplier > -0.5 &&  offsetMultiplier<0){
-          tY = -16;
+          scale = 0.9;
+          tY = -5;
           tZ = 150;
-          scale = 0.7;
           zIndex++;
         }
         console.log("slideOffset", slideOffset, slideEl);
