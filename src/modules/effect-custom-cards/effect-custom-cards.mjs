@@ -7,7 +7,7 @@ export default function EffectCustomCards({ swiper, extendParams, on }) {
     customCardsEffect: {
 
       slideSize: 125,
-      displacementX: 125,
+      displacementX: 150,
       displacementY: 0,
       displacementRotationZ: 0,
       displacementRotationY: 60
@@ -58,7 +58,6 @@ export default function EffectCustomCards({ swiper, extendParams, on }) {
           tZ = 150;
           zIndex++;
         }
-        console.log("slideOffset", slideOffset, slideEl);
       }else{
         alpha = 0;
         tX = -slideOffset;
